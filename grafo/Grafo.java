@@ -12,10 +12,9 @@ public class Grafo {
         this.matrizAdyacencia = new int[nodos][nodos];
     }
     
-    public void addArista(int u, int v)
+    public void addArista(int u, int v, int peso)
     {
-        matrizAdyacencia[u][v] = 1;
-        matrizAdyacencia[v][u] = 1;
+        matrizAdyacencia[u][v] = peso;
         A++;
     }
 }
