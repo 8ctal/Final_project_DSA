@@ -1,33 +1,33 @@
 package Questions;
 
+import lombok.*;
+
 import java.io.*;
 import java.util.*;
 
+@Getter
+@Setter
 public class Questions {
-    private List<String> questions = new ArrayList<String>();
+    private String question;
     private boolean answer;
 
-    public Questions() {
-        try {
-            questions = readQuestions();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
+    public Questions(String question, boolean answer) {
+        this.question = question;
+        this.answer = answer;
     }
 
-    public void print() {
-        for (String question : questions) {
+    public static void print(List<Questions> questions) {
+        for (Questions question : questions) {
             System.out.println(question);
         }
     }
 
-
-    public List<String> readQuestions() throws IOException {
-        List<String> qList = new LinkedList<>();
+    public static List<Questions> readQuestions() throws IOException {
+        List<Questions> qList = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(new File("Questions/questions.txt")))) {
             String line = reader.readLine();
             while (line != null) {
-                qList.add(line);
+                qList.add(new Questions(line, false));
                 line = reader.readLine();
             }
         } catch (IOException e) {
@@ -36,4 +36,11 @@ public class Questions {
         return qList;
     }
 
+    @Override
+    public String toString() {
+        return "Questions{" +
+                "question='" + question + '\'' +
+                ", answer=" + answer +
+                '}';
+    }
 }
