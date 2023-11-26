@@ -17,4 +17,18 @@ public class Grafo {
         matrizAdyacencia[u][v] = peso;
         A++;
     }
+    
+    public int getPeso(int u, int v)
+    {
+        return matrizAdyacencia[u][v];
+    }
+    
+    public void setPeso(int u, int v, int peso)
+    {
+        matrizAdyacencia[u][v] = peso;
+    }
 }
+
+
+    
+
