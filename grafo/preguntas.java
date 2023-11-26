@@ -20,7 +20,7 @@ public class preguntas {
         preguntas.add("¿Es familiar del infectado?");
         preguntas.add("¿Es amgio del infectado?");
         preguntas.add("¿Ha estado en contacto con el infectado?");
-        preguntas.add("¿Ha trabaja con el infectado?");
+        preguntas.add("¿Trabaja con el infectado?");
         preguntas.add("¿Estudia con el infectado?");
     }
 }

@@ -12,23 +12,10 @@ public class Grafo {
         this.matrizAdyacencia = new int[nodos][nodos];
     }
     
-    public void addArista(int u, int v, int peso)
+    public void addArista(int u, int v)
     {
-        matrizAdyacencia[u][v] = peso;
+        matrizAdyacencia[u][v] = 30;
         A++;
     }
     
-    public int getPeso(int u, int v)
-    {
-        return matrizAdyacencia[u][v];
-    }
-    
-    public void setPeso(int u, int v, int peso)
-    {
-        matrizAdyacencia[u][v] = peso;
-    }
 }
-
-
-    
-
