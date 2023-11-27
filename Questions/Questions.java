@@ -7,6 +7,7 @@ import java.util.*;
 
 @Getter
 @Setter
+@ToString
 public class Questions {
     private String question;
     private boolean answer;
@@ -36,11 +37,4 @@ public class Questions {
         return qList;
     }
 
-    @Override
-    public String toString() {
-        return "Questions{" +
-                "question='" + question + '\'' +
-                ", answer=" + answer +
-                '}';
-    }
 }

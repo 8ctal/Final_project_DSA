@@ -1,2 +1,8 @@
 ¿Es familiar del infectado?
-¿Prada la tiene pequeña?
+¿Ha estado en contacto con el infectado?
+¿Ha estado en contacto con alguien que haya estado en contacto con el infectado?
+¿Ha salido de su casa en los últimos 14 días?
+¿Ha estado en contacto con alguien que haya salido de su casa en los últimos 14 días?
+¿Ha presentado síntomas en los últimos 14 días?
+¿Ha estado en contacto con alguien que haya presentado síntomas en los últimos 14 días?
+¿Ha usado tapabocas en los últimos 14 días?
