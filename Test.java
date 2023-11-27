@@ -11,7 +11,8 @@ the infected and the healthy ones. So the graph is going to be G = (I,H E), wher
 sets of vertices and E is the set of edges. We are going to use the adjacency list representation
 */
 public class Test {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException 
+    {
         Vertex<String> a = new Vertex<>("A");
         Vertex<String> b = new Vertex<>("B");
         Vertex<String> c = new Vertex<>("C");

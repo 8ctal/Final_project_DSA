@@ -4,6 +4,9 @@ import java.util.*;
 import java.util.stream.*;
 
 public class Graph<T> {
+
+
+    //Disktra's Algorithm
     public void calculateShortestPath(Vertex<T> source) {
         source.setDistance(0);
         // Set of vertices whose shortest path is already found
@@ -27,6 +30,8 @@ public class Graph<T> {
         }
     }
 
+
+    //Print the shortest path from the source vertex to all other vertices
     public void printPaths(List<Vertex<T>> nodes) {
         nodes.forEach(node -> {
             String path = node.getShortestPath().stream()
@@ -38,6 +43,8 @@ public class Graph<T> {
             );
         });
     }
+
+    // Evaluate the shortest path to the adjacent vertex
 
     private void evaluateShortestPath(Vertex<T> ajdacentVertex, Integer edgeWeight, Vertex<T> sourceVertex) {
         // If the new distance is less than the current distance, update the distance and the shortest path
@@ -51,4 +58,66 @@ public class Graph<T> {
         }
     }
 
-}
+    /*Actualización de pesos preguntas relaciones
+     * 1. ¿Vive con el enfermo?
+     * 2. ¿Ha tenido contacto físico con el enfermo?
+     * 3. ¿Estudia o trabaja con el enfermo?
+     * 4. ¿Cuántos días ha estado en contacto con el enfermo?
+     */
+
+
+
+    /* djikstra.updateweights(List.of(a,b,c,d,e,f); */
+    public void updateWeight(List<Vertex<T>> nodes) {
+        for (Vertex<T> vertex : nodes) {
+
+            for (Edge<T> edge : vertex.getEdges()) {
+                List<String> addAdjacentVertexQuestions = vertex.addAdjacentVertexQuestions(edge.getTo(), "pregunta 1", "pregunta 2", "pregunta 3", "pregunta 4");
+
+
+                if (addAdjacentVertexQuestions.get(0).equalsIgnoreCase("True")) {
+                    int weight = edge.getWeight() - 10;
+                    edge.setWeight(weight);
+                }
+                if (addAdjacentVertexQuestions.get(1).equalsIgnoreCase("True")) {
+                    int weight = edge.getWeight() - 2;
+                    edge.setWeight(weight);
+                }
+                if (addAdjacentVertexQuestions.get(2).equalsIgnoreCase("True")) {
+                    int weight = edge.getWeight() - 5;
+                    edge.setWeight(weight);
+                }
+                if (addAdjacentVertexQuestions.get(3).equalsIgnoreCase("True")) {
+                    int dias = Integer.parseInt(addAdjacentVertexQuestions.get(3));
+                    if (dias > 0 && dias < 5) {
+                        int weight = edge.getWeight() - 2;
+                        edge.setWeight(weight);
+                    }
+                    if (dias > 5 && dias < 10) {
+                        int weight = edge.getWeight() - 4;
+                        edge.setWeight(weight);
+                    }
+                    if (dias > 10 && dias < 15) {
+                        int weight = edge.getWeight() - 6;
+                        edge.setWeight(weight);
+                    }
+                    if (dias > 15) {
+                        int weight = edge.getWeight() - 8;
+                        edge.setWeight(weight);
+
+                    }
+                }
+            }
+        }
+    }
+
+
+    }
+
+
+
+
+
+
+
+
