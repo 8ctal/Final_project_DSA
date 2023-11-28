@@ -1,2 +1,4 @@
-¿Ha ido a un centro comercial?
-¿Ha usado tapabocas en los últimos 14 días?
+¿Vive con el enfermo?
+¿Ha tenido contacto físico con el enfermo?
+¿Estudia o trabaja con el enfermo?
+¿Cuántos días ha estado en contacto con el enfermo?

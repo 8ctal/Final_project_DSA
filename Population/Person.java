@@ -2,7 +2,6 @@ package Population;
 
 import Questions.*;
 import lombok.*;
-
 import java.io.IOException;
 import java.util.List;
 
