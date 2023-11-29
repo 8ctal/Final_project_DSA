@@ -11,8 +11,24 @@ the infected and the healthy ones. So the graph is going to be G = (I,H E), wher
 sets of vertices and E is the set of edges. We are going to use the adjacency list representation
 */
 public class Test {
-    public static void main(String[] args) throws IOException 
-    {
+    public static void main(String[] args) throws IOException {
+
+        //Creating the population
+        List<Person> population = IntStream.range(0, 10).mapToObj(i -> new Person(
+                false,
+                false,
+                new Random().nextInt(100),
+                0,
+                List.of(true, false, true, false, true, false, true, false)
+        )).collect(Collectors.toList());
+        population.forEach(System.out::println);
+
+        //Creating vertices with population
+        List <Vertex> vertices = population.stream()
+                .map(person -> new Vertex(person))
+                .collect(Collectors.toList());
+        vertices.forEach(System.out::println);
+
         Vertex<String> a = new Vertex<>("A");
         Vertex<String> b = new Vertex<>("B");
         Vertex<String> c = new Vertex<>("C");
@@ -33,17 +49,6 @@ public class Test {
         dijkstra.calculateShortestPath(a);
         dijkstra.printPaths(List.of(a, b, d, e, f));
 
-        //Creating the population
-        List<Person> population = IntStream.range(0, 10).mapToObj(i -> new Person(
-                false,
-                false,
-                new Random().nextInt(100),
-                0,
-                List.of(true, false, true, false, true, false, true, false)
-        )).collect(Collectors.toList());
-        population.forEach(System.out::println);
-
-
         //Creating the questions
         List<Questions> questions = population.stream()
                 .map(person -> {
@@ -57,6 +62,8 @@ public class Test {
                 .flatMap(List::stream)
                 .collect(Collectors.toList());
         //questions.forEach(System.out::println);
+
+        //Printing the questions
         Questions.print(Questions.readQuestions());
     }
 }

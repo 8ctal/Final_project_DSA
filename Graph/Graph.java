@@ -58,14 +58,12 @@ public class Graph<T> {
         }
     }
 
-    /*Actualización de pesos preguntas relaciones
+    /*Updating the weights of the edges with relational questions
      * 1. ¿Vive con el enfermo?
      * 2. ¿Ha tenido contacto físico con el enfermo?
      * 3. ¿Estudia o trabaja con el enfermo?
      * 4. ¿Cuántos días ha estado en contacto con el enfermo?
      */
-
-
 
     /* djikstra.updateweights(List.of(a,b,c,d,e,f); */
     public void updateWeight(List<Vertex<T>> nodes) {
