@@ -1,7 +1,6 @@
 package Questions;
 
 import lombok.*;
-
 import java.io.*;
 import java.util.*;
 
@@ -36,5 +35,4 @@ public class Questions {
         }
         return qList;
     }
-
 }
