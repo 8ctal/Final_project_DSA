@@ -113,6 +113,8 @@ List<Person> population = IntStream.range(0, 10).mapToObj(i -> new Person(
                 .flatMap(List::stream)
                 .collect(Collectors.toList());
         //questions.forEach(System.out::println);
+
+        //Printing the questions
         Questions.print(Questions.readQuestions());
     }
 }
