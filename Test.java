@@ -93,7 +93,7 @@ List<Person> population = IntStream.range(0, 10).mapToObj(i -> new Person(
 
         Graph<Person> graph = new Graph<Person>();
 
-        graph.printGraph(List.of(A, B, C, D, E, F, G, H, I, J));
+        //graph.printGraph(List.of(A, B, C, D, E, F, G, H, I, J));
         graph.updateWeight(List.of(A, B, C, D, E, F, G, H, I, J));
     }
 

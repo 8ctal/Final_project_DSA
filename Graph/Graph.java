@@ -71,7 +71,7 @@ public class Graph<T> {
 
             if (!edge.isEmpty()) {
                 for (Vertex<T> edges : edge) {
-                    System.out.print(edges.getLetter() + " "); 
+                    System.out.print(edges.getLetter() + " : " + edges.getEdges() + " - ");
                 }
             }
 
@@ -87,10 +87,9 @@ public class Graph<T> {
      */
     public void updateWeight(List<Vertex<T>> nodes) {
         for (Vertex<T> vertex : nodes) {
-            
             for (Edge<T> edge : vertex.getEdges()) {
                 List<String> addAdjacentVertexQuestions = vertex.addAdjacentVertexQuestions(edge.getTo(), "pregunta 1", "pregunta 2", "pregunta 3", 4);
-
+                
                 if (addAdjacentVertexQuestions.get(0).equalsIgnoreCase("True")) {
                     int weight = edge.getWeight() - 10;
                     edge.setWeight(weight);
@@ -120,17 +119,9 @@ public class Graph<T> {
                     if (dias > 15) {
                         int weight = edge.getWeight() - 8;
                         edge.setWeight(weight);
-
                     }
                 }
             }
         }
     }
-
-
-
-
-
-
-
 }

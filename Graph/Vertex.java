@@ -29,12 +29,13 @@ public class Vertex<T> implements Comparable<Vertex<T>> {
 
     private List<Edge<T>> edges = new LinkedList<>();
 
-    public void addEdge(Vertex<T> to, Integer weight) {
-        Edge<T> e = new Edge<T>(this, to, weight);
+    public void addEdge(Vertex<T> to) {
+        Edge<T> e = new Edge<T>(this, to);
         edges.add(e);
     }
 
     public List<Edge<T>> getEdges(){
+        
         return this.edges;
     }
 
@@ -62,9 +63,9 @@ public class Vertex<T> implements Comparable<Vertex<T>> {
      * 4. ¿Cuántos días ha estado en contacto con la Persona?
      */
 
-
-     public List<String> addAdjacentVertexQuestions(Vertex<T> vertex, String question1, String question2, String question3, int answer4) {
+    public List<String> addAdjacentVertexQuestions(Vertex<T> vertex, String question1, String question2, String question3, int answer4) {
         adjacentVertices.add(vertex);
+        adjacentVerticesWithWeights.put(vertex, 40);
         List<String> answers = new ArrayList<>();
         answers.add(question1);
         answers.add(question2);
