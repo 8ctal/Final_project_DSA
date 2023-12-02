@@ -30,6 +30,10 @@ public class Graph<T> {
         }
     }
 
+  
+
+
+
 
     //Print the shortest path from the source vertex to all other vertices
     public void printPaths(List<Vertex<T>> nodes) {
@@ -58,22 +62,34 @@ public class Graph<T> {
         }
     }
 
+
+    public void printGraph(List<Vertex<T>> nodes) {
+        for (Vertex<T> vertex : nodes) {
+            System.out.print(vertex.getLetter() + " -> "); 
+
+            Set<Vertex<T>> edge = vertex.getAdjacentVertices();
+
+            if (!edge.isEmpty()) {
+                for (Vertex<T> edges : edge) {
+                    System.out.print(edges.getLetter() + " "); 
+                }
+            }
+
+            System.out.println();
+        }
+    }
+
     /*Actualización de pesos preguntas relaciones
      * 1. ¿Vive con el enfermo?
      * 2. ¿Ha tenido contacto físico con el enfermo?
      * 3. ¿Estudia o trabaja con el enfermo?
      * 4. ¿Cuántos días ha estado en contacto con el enfermo?
      */
-
-
-
-    /* djikstra.updateweights(List.of(a,b,c,d,e,f); */
     public void updateWeight(List<Vertex<T>> nodes) {
         for (Vertex<T> vertex : nodes) {
-
+            
             for (Edge<T> edge : vertex.getEdges()) {
-                List<String> addAdjacentVertexQuestions = vertex.addAdjacentVertexQuestions(edge.getTo(), "pregunta 1", "pregunta 2", "pregunta 3", "pregunta 4");
-
+                List<String> addAdjacentVertexQuestions = vertex.addAdjacentVertexQuestions(edge.getTo(), "pregunta 1", "pregunta 2", "pregunta 3", 4);
 
                 if (addAdjacentVertexQuestions.get(0).equalsIgnoreCase("True")) {
                     int weight = edge.getWeight() - 10;
@@ -110,4 +126,11 @@ public class Graph<T> {
             }
         }
     }
+
+
+
+
+
+
+
 }
