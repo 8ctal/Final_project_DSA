@@ -1,5 +1,4 @@
 package Graph;
-
 import lombok.*;
 
 import java.util.*;
@@ -15,7 +14,18 @@ public class Vertex<T> implements Comparable<Vertex<T>> {
     private Integer distance = Integer.MAX_VALUE; // For Dijkstra's Algorithm
     private List<Vertex<T>> shortestPath = new LinkedList<>(); // For Dijkstra's Algorithm
     private Map<Vertex<T>, Integer> adjacentVerticesWithWeights = new HashMap<>(); // For Dijkstra's Algorithm
+    private char letter;
 
+    /*public Vertex(T data) {
+        this.data = data;
+        this.visited = false;
+    }*/
+
+    public Vertex(T data, char letter) {
+        this.data = data;
+        this.letter = letter;
+   
+    }
 
     private List<Edge<T>> edges = new LinkedList<>();
 
@@ -24,27 +34,43 @@ public class Vertex<T> implements Comparable<Vertex<T>> {
         edges.add(e);
     }
 
+    public List<Edge<T>> getEdges(){
+        return this.edges;
+    }
+
+    public char getLetter() {
+        return letter;
+    }
+
+
     //Dijkstra's Algorithm
     public void addAdjacentVertexWithWeight(Vertex<T> vertex, Integer weight) {
         adjacentVerticesWithWeights.put(vertex, weight);
     }
+
+    
     //Kruskal's Algorithm
 
     public void addAdjacentVertex(Vertex<T> vertex) {
         adjacentVertices.add(vertex);
     }
 
-    /*Preguntas relacionales */
+    /* preguntas relaciones
+     * 1. ¿Vive con la Persona?
+     * 2. ¿Ha tenido contacto físico con la Persona?
+     * 3. ¿Estudia o trabaja con la Persona?
+     * 4. ¿Cuántos días ha estado en contacto con la Persona?
+     */
 
-    public List<String> addAdjacentVertexQuestions(Vertex<T> vertex, String question1,
-                                                   String question2, String question3, String question4) {
+
+     public List<String> addAdjacentVertexQuestions(Vertex<T> vertex, String question1, String question2, String question3, int answer4) {
         adjacentVertices.add(vertex);
-        List<String> Answer = new ArrayList<>();
-        Answer.add(question1);
-        Answer.add(question2);
-        Answer.add(question3);
-        Answer.add(question4);
-        return Answer;
+        List<String> answers = new ArrayList<>();
+        answers.add(question1);
+        answers.add(question2);
+        answers.add(question3);
+        answers.add(String.valueOf(answer4)); // Convertir la variable numérica a String y agregarla como respuesta
+        return answers;
     }
 
 

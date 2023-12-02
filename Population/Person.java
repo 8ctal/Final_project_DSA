@@ -1,31 +1,30 @@
 package Population;
-
-import Questions.*;
 import lombok.*;
-import java.io.IOException;
-import java.util.List;
-
 @Getter
 @Setter
 @ToString
 @AllArgsConstructor
+
 public class Person {
-    private boolean infected;
-    private boolean vaccinated;
+    private String name;
     private int age;
-    private int daysInfected;
-    private List<Boolean> answers;
+    private boolean infected;
+    private InfectionType infectionType;
 
-    public Boolean getAnswer(int index) {
-        return answers.get(index);
+
+
+    public static Person createUninfectedPerson(String name, int age) {
+        return new Person(name, age, false, InfectionType.NONE);
     }
 
-    public List<Questions> addAnswer() throws IOException {
-        List<Questions> questions = Questions.readQuestions();
-        questions.forEach(question -> {
-            question.setAnswer(answers.get(questions.indexOf(question)));
-        });
-        return questions;
+    public static Person createInfectedPerson(String name, int age, InfectionType infectionType) {
+        return new Person(name, age, true, infectionType);
     }
 
+    public enum InfectionType {
+        VIRUS,
+        BACTERIA,
+        FUNGUS,
+        NONE // Para representar a una persona no infectada
+    }
 }

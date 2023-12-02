@@ -18,12 +18,6 @@ public class Edge<T> implements Comparable<Edge<T>> {
         this.weight = weight;
     }
 
-    //Constructor for Prim's Algorithm
-    public Edge(int weight) {
-        this.from = null;
-        this.to = null;
-        this.weight = weight;
-    }
 
     @Override
     public int compareTo(Edge<T> edge) {
