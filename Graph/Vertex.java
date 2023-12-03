@@ -5,8 +5,8 @@ import java.util.*;
 
 @Getter
 @Setter
+@ToString
 @RequiredArgsConstructor
-
 public class Vertex<T> implements Comparable<Vertex<T>> {
     private final T data;
     private boolean visited;
@@ -30,12 +30,13 @@ public class Vertex<T> implements Comparable<Vertex<T>> {
 
     private List<Edge<T>> edges = new LinkedList<>();
 
-    public void addEdge(Vertex<T> to, Integer weight){
-        Edge<T> e = new Edge<T>(this, to, weight);
+    public void addEdge(Vertex<T> to) {
+        Edge<T> e = new Edge<T>(this, to);
         edges.add(e);
     }
 
     public List<Edge<T>> getEdges(){
+        
         return this.edges;
     }
 
@@ -73,8 +74,8 @@ public class Vertex<T> implements Comparable<Vertex<T>> {
         answers.add(String.valueOf(answer4)); // Convertir la variable numérica a String y agregarla como respuesta
 
     }
-    
-    
+
+
     //For Dijkstra's Algorithm
     @Override
     //Override the method of Comparable Interface, to sort the vertices by distance

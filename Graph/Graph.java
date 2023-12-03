@@ -71,7 +71,7 @@ public class Graph<T> {
 
             if (!edge.isEmpty()) {
                 for (Vertex<T> edges : edge) {
-                    System.out.print(edges.getLetter() + " "); 
+                    System.out.print(edges.getLetter() + " : " + edges.getEdges() + " - ");
                 }
             }
 
