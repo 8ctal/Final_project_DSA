@@ -2,6 +2,8 @@ package Graph;
 
 import java.util.*;
 import java.util.stream.*;
+import Population.*;
+import Population.Person.InfectionType;
 
 public class Graph<T> {
 
@@ -30,9 +32,6 @@ public class Graph<T> {
         }
     }
 
-  
-
-
 
 
     //Print the shortest path from the source vertex to all other vertices
@@ -49,6 +48,7 @@ public class Graph<T> {
     }
 
     // Evaluate the shortest path to the adjacent vertex
+
 
     private void evaluateShortestPath(Vertex<T> ajdacentVertex, Integer edgeWeight, Vertex<T> sourceVertex) {
         // If the new distance is less than the current distance, update the distance and the shortest path
@@ -87,46 +87,55 @@ public class Graph<T> {
      */
     public void updateWeight(List<Vertex<T>> nodes) {
         for (Vertex<T> vertex : nodes) {
-            
-            for (Edge<T> edge : vertex.getEdges()) {
-                List<String> addAdjacentVertexQuestions = vertex.addAdjacentVertexQuestions(edge.getTo(), "pregunta 1", "pregunta 2", "pregunta 3", 4);
-
+            for (Map.Entry<Vertex<T>, Integer> entry : vertex.getAdjacentVerticesWithWeights().entrySet()) {
+                Integer weight = entry.getValue();
+                
+                List<String> addAdjacentVertexQuestions = vertex.getAnswers();
+    
                 if (addAdjacentVertexQuestions.get(0).equalsIgnoreCase("True")) {
-                    int weight = edge.getWeight() - 10;
-                    edge.setWeight(weight);
+                    weight = weight - 10;
+                    
                 }
                 if (addAdjacentVertexQuestions.get(1).equalsIgnoreCase("True")) {
-                    int weight = edge.getWeight() - 2;
-                    edge.setWeight(weight);
+                    weight = weight - 2;
+                     
                 }
                 if (addAdjacentVertexQuestions.get(2).equalsIgnoreCase("True")) {
-                    int weight = edge.getWeight() - 5;
-                    edge.setWeight(weight);
+                    weight = weight - 5;
+                    
                 }
                 if (addAdjacentVertexQuestions.get(3).equalsIgnoreCase("True")) {
                     int dias = Integer.parseInt(addAdjacentVertexQuestions.get(3));
                     if (dias > 0 && dias < 5) {
-                        int weight = edge.getWeight() - 2;
-                        edge.setWeight(weight);
-                    }
-                    if (dias > 5 && dias < 10) {
-                        int weight = edge.getWeight() - 4;
-                        edge.setWeight(weight);
-                    }
-                    if (dias > 10 && dias < 15) {
-                        int weight = edge.getWeight() - 6;
-                        edge.setWeight(weight);
-                    }
-                    if (dias > 15) {
-                        int weight = edge.getWeight() - 8;
-                        edge.setWeight(weight);
-
+                        weight = weight - 2;
+                       
+                    } else if (dias >= 5 && dias < 10) {
+                        weight = weight - 4;
+                    } else if (dias >= 10 && dias < 15) {
+                        weight = weight - 6;
+                    } else {
+                        weight = weight - 8;
                     }
                 }
+                
+                // Actualizar el peso para el vértice adyacente
+                entry.setValue(weight);
             }
         }
     }
-
+    
+    public void printGraphWithWeights(List<Vertex<T>> nodes) {
+        for (Vertex<T> vertex : nodes) {
+            for (Map.Entry<Vertex<T>, Integer> entry : vertex.getAdjacentVerticesWithWeights().entrySet()) {
+                Vertex<T> adjacentVertex = entry.getKey();
+                int weight = entry.getValue();
+                
+                System.out.println(vertex.getLetter() + " -> " + adjacentVertex.getLetter() + " : " + weight);
+            }
+            
+            System.out.println();
+        }
+    }
 
 
 

@@ -15,6 +15,7 @@ public class Vertex<T> implements Comparable<Vertex<T>> {
     private List<Vertex<T>> shortestPath = new LinkedList<>(); // For Dijkstra's Algorithm
     private Map<Vertex<T>, Integer> adjacentVerticesWithWeights = new HashMap<>(); // For Dijkstra's Algorithm
     private char letter;
+    private List<String> answers = new ArrayList<>(); 
 
     /*public Vertex(T data) {
         this.data = data;
@@ -63,14 +64,14 @@ public class Vertex<T> implements Comparable<Vertex<T>> {
      */
 
 
-     public List<String> addAdjacentVertexQuestions(Vertex<T> vertex, String question1, String question2, String question3, int answer4) {
+     public void addAdjacentVertexQuestions(Vertex<T> vertex, String question1, String question2, String question3, int answer4) {
         adjacentVertices.add(vertex);
-        List<String> answers = new ArrayList<>();
+        adjacentVerticesWithWeights.put(vertex, 40);
         answers.add(question1);
         answers.add(question2);
         answers.add(question3);
         answers.add(String.valueOf(answer4)); // Convertir la variable numérica a String y agregarla como respuesta
-        return answers;
+
     }
     
     

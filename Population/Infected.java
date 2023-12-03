@@ -8,6 +8,5 @@ public class Infected extends Person {
         super(name, age, true, infectionType);
     }
 
-    
 }
 

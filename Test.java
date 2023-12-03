@@ -92,9 +92,11 @@ List<Person> population = IntStream.range(0, 10).mapToObj(i -> new Person(
         // Crear grafo
 
         Graph<Person> graph = new Graph<Person>();
-
-        graph.printGraph(List.of(A, B, C, D, E, F, G, H, I, J));
+        graph.printGraphWithWeights(List.of(A, B, C, D, E, F, G, H, I, J));
         graph.updateWeight(List.of(A, B, C, D, E, F, G, H, I, J));
+        System.out.println("Updated weights: ");
+        graph.printGraphWithWeights(List.of(A, B, C, D, E, F, G, H, I, J));
+
     }
 
 }
