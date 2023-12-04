@@ -89,62 +89,69 @@ public class Graph<T> {
      */
 
     public void updateWeight(List<Vertex<Person>> nodes) {
+        Set<Vertex<Person>> visitedNodes = new HashSet<>();
+
         for (Vertex<Person> vertex : nodes) {
+            if (!visitedNodes.contains(vertex)) {
+                updateWeightHelper(vertex, visitedNodes);
+            }
+        }
+    }
+
+
+
+    private void updateWeightHelper(Vertex<Person> vertex, Set<Vertex<Person>> visited) {
+        visited.add(vertex);
+
+        for (Map.Entry<Vertex<Person>, Integer> entry : vertex.getAdjacentVerticesWithWeights().entrySet()) {
+            Vertex<Person> adjacentVertex = entry.getKey();
             
-            for (Map.Entry<Vertex<Person>, Integer> entry : vertex.getAdjacentVerticesWithWeights().entrySet()) {
                 Integer weight = entry.getValue();
 
-                //UpdateWeight by No-Relationship Questions
+                // UpdateWeight by No-Relationship Questions
 
-                //UpdateWeight by Age
+                // UpdateWeight by Age
                 int ageVertex = vertex.getData().getAge();
-                int ageAdjacentVertex = entry.getKey().getData().getAge();
+                int ageAdjacentVertex = adjacentVertex.getData().getAge();
 
                 if (ageVertex < 10 || ageAdjacentVertex < 10) {
                     weight = weight - 10;
-                } else if (ageVertex >= 10 && ageVertex < 30 || ageAdjacentVertex >= 10 && ageAdjacentVertex < 30) {
+                } else if ((ageVertex >= 10 && ageVertex < 30) || (ageAdjacentVertex >= 10 && ageAdjacentVertex < 30)) {
                     weight = weight - 3;
-                } else if (ageVertex >= 30 && ageVertex < 60 || ageAdjacentVertex >= 30 && ageAdjacentVertex < 60) {
+                } else if ((ageVertex >= 30 && ageVertex < 60) || (ageAdjacentVertex >= 30 && ageAdjacentVertex < 60)) {
                     weight = weight - 5;
-                } else if (ageVertex >= 60 && ageVertex < 100 || ageAdjacentVertex >= 60 && ageAdjacentVertex < 100) {
+                } else if ((ageVertex >= 60 && ageVertex < 100) || (ageAdjacentVertex >= 60 && ageAdjacentVertex < 100)) {
                     weight = weight - 10;
                 }
 
                 // UpdateWeight by InfectionType
                 InfectionType infectionVertex = vertex.getData().getInfectionType();
-                InfectionType infectionAdjacentVertex = entry.getKey().getData().getInfectionType();
-                
+                InfectionType infectionAdjacentVertex = adjacentVertex.getData().getInfectionType();
+
                 if (infectionVertex == InfectionType.VIRUS || infectionAdjacentVertex == InfectionType.VIRUS) {
                     weight = weight - 10;
-                    
                 } else if (infectionVertex == InfectionType.BACTERIA || infectionAdjacentVertex == InfectionType.BACTERIA) {
                     weight = weight - 5;
-                    
                 } else if (infectionVertex == InfectionType.FUNGUS || infectionAdjacentVertex == InfectionType.FUNGUS) {
-                    weight = weight - 2; 
-                } 
+                    weight = weight - 2;
+                }
 
                 // UpdateWeight by Relationship Questions
-                    
                 List<String> addAdjacentVertexQuestions = vertex.getAnswers();
-    
+
                 if (addAdjacentVertexQuestions.get(0).equalsIgnoreCase("True")) {
                     weight = weight - 10;
-                    
                 }
                 if (addAdjacentVertexQuestions.get(1).equalsIgnoreCase("True")) {
                     weight = weight - 2;
-                     
                 }
                 if (addAdjacentVertexQuestions.get(2).equalsIgnoreCase("True")) {
                     weight = weight - 5;
-                    
                 }
                 if (addAdjacentVertexQuestions.get(3).equalsIgnoreCase("True")) {
                     int dias = Integer.parseInt(addAdjacentVertexQuestions.get(3));
                     if (dias > 0 && dias < 5) {
                         weight = weight - 2;
-                       
                     } else if (dias >= 5 && dias < 10) {
                         weight = weight - 4;
                     } else if (dias >= 10 && dias < 15) {
@@ -153,8 +160,14 @@ public class Graph<T> {
                         weight = weight - 8;
                     }
                 }
-                // Update the weight of the edge
+
+             
                 entry.setValue(weight);
+                
+                // Update the weight of the edge in the adjacent vertex
+                if (!visited.contains(adjacentVertex)) {
+                
+                updateWeightHelper(adjacentVertex, visited);
             }
         }
     }
@@ -175,32 +188,66 @@ public class Graph<T> {
 
     //Update infection.Type status
 
-    public void updateInfectionType(List<Vertex<Person>> nodes){
-        
+    public void updateInfectionType(List<Vertex<Person>> nodes) {
+        Set<Vertex<Person>> visited = new HashSet<>();
+    
         for (Vertex<Person> vertex : nodes) {
-            
-            for (Map.Entry<Vertex<Person>, Integer> entry : vertex.getAdjacentVerticesWithWeights().entrySet()) {
-                 Integer weight = entry.getValue();
-                InfectionType infectionVertex = vertex.getData().getInfectionType();
-                InfectionType infectionAdjacentVertex = entry.getKey().getData().getInfectionType();
-
-                if (infectionVertex == InfectionType.NONE && weight<20 ) {
-                        InfectionType infectionType = InfectionType.VIRUS;                          
-
-
-
+            if (!visited.contains(vertex)) {
+                updateInfectionTypeHelper(vertex, visited);
+            }
+        }
+    }
+    
+    private void updateInfectionTypeHelper(Vertex<Person> vertex, Set<Vertex<Person>> visited) {
+        visited.add(vertex);
+    
+        Map<InfectionType, Integer> lowestWeightByInfection = new HashMap<>();
+    
+        for (Map.Entry<Vertex<Person>, Integer> entry : vertex.getAdjacentVerticesWithWeights().entrySet()) {
+            Vertex<Person> adjacentVertex = entry.getKey();
+            InfectionType infectionAdjacentVertex = adjacentVertex.getData().getInfectionType();
+            Integer weight = entry.getValue();
+    
+            if (weight <= 20 && infectionAdjacentVertex != null) {
+                if (!lowestWeightByInfection.containsKey(infectionAdjacentVertex) || weight < lowestWeightByInfection.get(infectionAdjacentVertex)) {
+                    lowestWeightByInfection.put(infectionAdjacentVertex, weight);
                 }
             }
         }
+    
+        InfectionType minWeightInfection = null;
+        int minWeight = Integer.MAX_VALUE;
+    
+        for (Map.Entry<InfectionType, Integer> entry : lowestWeightByInfection.entrySet()) {
+            if (entry.getValue() < minWeight) {
+                minWeight = entry.getValue();
+                minWeightInfection = entry.getKey();
+            }
+        }
+    
+        if (minWeightInfection != null) {
+            vertex.getData().setInfectionType(minWeightInfection);
+        }
+    
+        for (Map.Entry<Vertex<Person>, Integer> entry : vertex.getAdjacentVerticesWithWeights().entrySet()) {
+            Vertex<Person> adjacentVertex = entry.getKey();
+            if (!visited.contains(adjacentVertex)) {
+                updateInfectionTypeHelper(adjacentVertex, visited);
+            }
+        }
+    }
+
+    // Print the infection type of each person
+    public void printInfectionType(List<Vertex<Person>> nodes){
+        for (Vertex<Person> vertex : nodes) {
+            System.out.println("Name: " + vertex.getData().getName() + " Infection Type: " + vertex.getData().getInfectionType());
+        }
+
 
 
     }
 
-
-
-    }
-
-
+}
 
 
 

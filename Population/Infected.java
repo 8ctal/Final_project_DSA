@@ -1,7 +1,7 @@
 package Population;
 
 
-import lombok.*;
+/*import lombok.*; */
 
 public class Infected extends Person {
     public Infected(String name, int age, InfectionType infectionType) {
