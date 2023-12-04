@@ -1,9 +1,9 @@
 import Graph.*;
 import Population.*;
 import Population.Person.InfectionType;
-import java.util.*;
 
-import java.io.IOException;
+import java.util.*;
+import java.io.*;
 
 
 /*We are going to work with bi-partite graphs, so we are going to have two sets of vertices,
@@ -11,8 +11,7 @@ the infected and the healthy ones. So the graph is going to be G = (I,H E), wher
 sets of vertices and E is the set of edges. We are going to use the adjacency list representation
 */
 public class Test {
-    public static void main(String[] args) throws IOException
-    {
+    public static void main(String[] args) throws IOException {
         /* 
         Vertex<String> a = new Vertex<>("A");
         Vertex<String> b = new Vertex<>("B");
@@ -47,8 +46,8 @@ List<Person> population = IntStream.range(0, 10).mapToObj(i -> new Person(
 
 */
 
-  // Crear 10 personas
-        Person person1 = new  Person("Alice", 25);
+        // Crear 10 personas
+        Person person1 = new Person("Alice", 25);
         Person person2 = new Person("Bob", 30); //InfectionType.None
         Person person3 = new Person("Charlie", 22, InfectionType.VIRUS);
         Person person4 = new Person("David", 28);
@@ -75,11 +74,12 @@ List<Person> population = IntStream.range(0, 10).mapToObj(i -> new Person(
 
         // Crear relaciones
 
-        A.addAdjacentVertexQuestions(B, "True", "False", "True", 7);
-        A.addAdjacentVertexQuestions(C, "False", "True", "False", 5);
-        B.addAdjacentVertexQuestions(C, "True", "False", "True", 3);
+        /*A.addAdjacentVertexQuestions(B, "True", "False", "True", 7);
+        A.addAdjacentVertexQuestions(C, "False", "True", "False", 5); */
+        B.addAdjacentVertexQuestions(C, "False", "False", "False", 3);
         B.addAdjacentVertexQuestions(F, "False", "True", "False", 6);
         B.addAdjacentVertexQuestions(H, "True", "False", "True", 8);
+        /*
         C.addAdjacentVertexQuestions(D, "False", "True", "False", 1);
         D.addAdjacentVertexQuestions(E, "True", "False", "True", 3);
         D.addAdjacentVertexQuestions(F, "False", "True", "False", 2);
@@ -88,23 +88,26 @@ List<Person> population = IntStream.range(0, 10).mapToObj(i -> new Person(
         G.addAdjacentVertexQuestions(H, "True", "False", "True", 3);
         H.addAdjacentVertexQuestions(I, "False", "True", "False", 2);
         I.addAdjacentVertexQuestions(J, "True", "False", "True", 4);
-        J.addAdjacentVertexQuestions(A, "False", "True", "False", 1);
+        J.addAdjacentVertexQuestions(A, "False", "True", "False", 1);*/
 
         // Crear grafo
 
         Graph<Person> graph = new Graph<Person>();
-
+/*
         System.out.println("Weights: ");
         graph.printGraphWithWeights(List.of(A, B, C, D, E, F, G, H, I, J));
         System.out.println("Infection type: ");
         graph.printInfectionType(List.of(A, B, C, D, E, F, G, H, I, J));
-
+*/
         System.out.println("Updated weights: ");
         graph.updateWeight(List.of(A, B, C, D, E, F, G, H, I, J));
         graph.printGraphWithWeights(List.of(A, B, C, D, E, F, G, H, I, J));
+        /*
         System.out.println(" New Infection type: ");
         graph.updateInfectionType(List.of(A, B, C, D, E, F, G, H, I, J));
         graph.printInfectionType(List.of(A, B, C, D, E, F, G, H, I, J));
+
+        */
 
     }
 

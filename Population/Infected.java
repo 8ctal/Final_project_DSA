@@ -1,6 +1,5 @@
 package Population;
 
-
 /*import lombok.*; */
 
 public class Infected extends Person {

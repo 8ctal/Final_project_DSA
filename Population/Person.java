@@ -1,5 +1,7 @@
 package Population;
+
 import lombok.*;
+
 @Getter
 @Setter
 @ToString
@@ -12,14 +14,13 @@ public class Person {
     private InfectionType infectionType;
 
 
-
-    public Person(String name, int age){
+    public Person(String name, int age) {
         this.name = name;
         this.age = age;
         this.infected = false;
     }
 
-    public  Person(String name, int age, InfectionType infectionType) {
+    public Person(String name, int age, InfectionType infectionType) {
         this.name = name;
         this.age = age;
         this.infected = true;

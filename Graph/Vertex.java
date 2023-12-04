@@ -1,4 +1,5 @@
 package Graph;
+
 import lombok.*;
 
 import java.util.*;
@@ -7,7 +8,7 @@ import Population.Person;
 
 @Getter
 @Setter
-@AllArgsConstructor 
+@AllArgsConstructor
 
 public class Vertex<T> implements Comparable<Vertex<T>> {
     private final T data;
@@ -16,8 +17,9 @@ public class Vertex<T> implements Comparable<Vertex<T>> {
     private Integer distance = Integer.MAX_VALUE; // For Dijkstra's Algorithm
     private List<Vertex<T>> shortestPath = new LinkedList<>(); // For Dijkstra's Algorithm
     private Map<Vertex<T>, Integer> adjacentVerticesWithWeights = new HashMap<>(); // For Dijkstra's Algorithm
-    private char letter;
-    private List<String> answers = new ArrayList<>(); 
+    private char letter; //For better visualization of the graph
+    private List<String> answers = new ArrayList<>(); //For the questions
+    private List<Edge<T>> edges = new LinkedList<>();
 
     /*public Vertex(T data) {
         this.data = data;
@@ -27,18 +29,7 @@ public class Vertex<T> implements Comparable<Vertex<T>> {
     public Vertex(T data, char letter) {
         this.data = data;
         this.letter = letter;
-   
-    }
 
-    private List<Edge<T>> edges = new LinkedList<>();
-
-
-    public List<Edge<T>> getEdges(){
-        return this.edges;
-    }
-
-    public char getLetter() {
-        return letter;
     }
 
 
@@ -47,14 +38,12 @@ public class Vertex<T> implements Comparable<Vertex<T>> {
         adjacentVerticesWithWeights.put(vertex, weight);
     }
 
-    
     //Kruskal's Algorithm
-
     public void addAdjacentVertex(Vertex<T> vertex) {
         adjacentVertices.add(vertex);
     }
 
-    /* preguntas relaciones
+    /* PREGUNTAS RELACIONALES
      * 1. ¿Vive con la Persona?
      * 2. ¿Ha tenido contacto físico con la Persona?
      * 3. ¿Estudia o trabaja con la Persona?
@@ -62,7 +51,7 @@ public class Vertex<T> implements Comparable<Vertex<T>> {
      */
 
 
-     public void addAdjacentVertexQuestions(Vertex<T> vertex, String question1, String question2, String question3, int question4) {
+    public void addAdjacentVertexQuestions(Vertex<T> vertex, String question1, String question2, String question3, int question4) {
         adjacentVertices.add(vertex);
         adjacentVerticesWithWeights.put(vertex, 40);
         answers.add(question1);
@@ -71,7 +60,7 @@ public class Vertex<T> implements Comparable<Vertex<T>> {
         answers.add(String.valueOf(question4)); // Convertir la variable numérica a String y agregarla como respuesta
 
     }
-    
+
 
     public void informationPerson(Vertex<Person> nodo) {
         System.out.println("Name: " + nodo.getData().getInfectionType());
