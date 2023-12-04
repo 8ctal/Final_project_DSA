@@ -48,16 +48,17 @@ List<Person> population = IntStream.range(0, 10).mapToObj(i -> new Person(
 */
 
   // Crear 10 personas
-        Person person1 = Person.createUninfectedPerson("Alice", 25);
-        Person person2 = Person.createUninfectedPerson("Bob", 30);
-        Person person3 = Person.createInfectedPerson("Charlie", 22, InfectionType.VIRUS);
-        Person person4 = Person.createUninfectedPerson("David", 28);
-        Person person5 = Person.createUninfectedPerson("Eve", 35);
-        Person person6 = Person.createInfectedPerson("Frank", 27, InfectionType.BACTERIA);
-        Person person7 = Person.createUninfectedPerson("Grace", 29);
-        Person person8 = Person.createInfectedPerson("Hannah", 26, InfectionType.FUNGUS);
-        Person person9 = Person.createUninfectedPerson("Ian", 32);
-        Person person10 = Person.createUninfectedPerson("Julia", 31);
+        Person person1 = new  Person("Alice", 25);
+        Person person2 = new Person("Bob", 30);
+        Person person3 = new Person("Charlie", 22, InfectionType.VIRUS);
+        Person person4 = new Person("David", 28);
+        Person person5 = new Person("Eve", 35);
+        Person person6 = new Person("Frank", 27, InfectionType.BACTERIA);
+        Person person7 = new Person("Grace", 79);
+        Person person8 = new Person("Hannah", 26, InfectionType.FUNGUS);
+        Person person9 = new Person("Ian", 8);
+        Person person10 = new Person("Julia", 17);
+
 
         // Crear vertices
 
@@ -92,10 +93,13 @@ List<Person> population = IntStream.range(0, 10).mapToObj(i -> new Person(
         // Crear grafo
 
         Graph<Person> graph = new Graph<Person>();
+
         graph.printGraphWithWeights(List.of(A, B, C, D, E, F, G, H, I, J));
         graph.updateWeight(List.of(A, B, C, D, E, F, G, H, I, J));
         System.out.println("Updated weights: ");
         graph.printGraphWithWeights(List.of(A, B, C, D, E, F, G, H, I, J));
+       
+       
 
     }
 

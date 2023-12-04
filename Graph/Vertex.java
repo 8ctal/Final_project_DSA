@@ -3,10 +3,12 @@ import lombok.*;
 
 import java.util.*;
 
+import Population.Person;
+
 @Getter
 @Setter
-@ToString
-@RequiredArgsConstructor
+@AllArgsConstructor 
+
 public class Vertex<T> implements Comparable<Vertex<T>> {
     private final T data;
     private boolean visited;
@@ -30,13 +32,8 @@ public class Vertex<T> implements Comparable<Vertex<T>> {
 
     private List<Edge<T>> edges = new LinkedList<>();
 
-    public void addEdge(Vertex<T> to) {
-        Edge<T> e = new Edge<T>(this, to);
-        edges.add(e);
-    }
 
     public List<Edge<T>> getEdges(){
-        
         return this.edges;
     }
 
@@ -65,16 +62,20 @@ public class Vertex<T> implements Comparable<Vertex<T>> {
      */
 
 
-     public void addAdjacentVertexQuestions(Vertex<T> vertex, String question1, String question2, String question3, int answer4) {
+     public void addAdjacentVertexQuestions(Vertex<T> vertex, String question1, String question2, String question3, int question4) {
         adjacentVertices.add(vertex);
         adjacentVerticesWithWeights.put(vertex, 40);
         answers.add(question1);
         answers.add(question2);
         answers.add(question3);
-        answers.add(String.valueOf(answer4)); // Convertir la variable numérica a String y agregarla como respuesta
+        answers.add(String.valueOf(question4)); // Convertir la variable numérica a String y agregarla como respuesta
 
     }
+    
 
+    public void informationPerson(Vertex<Person> nodo) {
+        System.out.println("Name: " + nodo.getData().getInfectionType());
+    }
 
     //For Dijkstra's Algorithm
     @Override
@@ -82,4 +83,5 @@ public class Vertex<T> implements Comparable<Vertex<T>> {
     public int compareTo(Vertex<T> vertex) {
         return Integer.compare(this.distance, vertex.getDistance());
     }
+
 }

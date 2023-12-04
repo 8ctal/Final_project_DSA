@@ -13,12 +13,17 @@ public class Person {
 
 
 
-    public static Person createUninfectedPerson(String name, int age) {
-        return new Person(name, age, false, InfectionType.NONE);
+    public Person(String name, int age){
+        this.name = name;
+        this.age = age;
+        this.infected = false;
     }
 
-    public static Person createInfectedPerson(String name, int age, InfectionType infectionType) {
-        return new Person(name, age, true, infectionType);
+    public  Person(String name, int age, InfectionType infectionType) {
+        this.name = name;
+        this.age = age;
+        this.infected = true;
+        this.infectionType = infectionType;
     }
 
     public enum InfectionType {

@@ -2,8 +2,10 @@ package Graph;
 
 import java.util.*;
 import java.util.stream.*;
-import Population.*;
+
+import Population.Person;
 import Population.Person.InfectionType;
+
 
 public class Graph<T> {
 
@@ -79,17 +81,51 @@ public class Graph<T> {
         }
     }
 
-    /*Actualización de pesos preguntas relaciones
-     * 1. ¿Vive con el enfermo?
-     * 2. ¿Ha tenido contacto físico con el enfermo?
-     * 3. ¿Estudia o trabaja con el enfermo?
-     * 4. ¿Cuántos días ha estado en contacto con el enfermo?
+    /*Weight update for relationship questions
+     * 1. Does the person live with the infected individual?
+     * 2. Has the person had physical contact with the infected individual?
+     * 3. Does the person study or work with the infected individual?
+     * 4. How many days has the person been in contact with the infected individual?
      */
-    public void updateWeight(List<Vertex<T>> nodes) {
-        for (Vertex<T> vertex : nodes) {
-            for (Map.Entry<Vertex<T>, Integer> entry : vertex.getAdjacentVerticesWithWeights().entrySet()) {
+
+    public void updateWeight(List<Vertex<Person>> nodes) {
+        for (Vertex<Person> vertex : nodes) {
+            
+            for (Map.Entry<Vertex<Person>, Integer> entry : vertex.getAdjacentVerticesWithWeights().entrySet()) {
                 Integer weight = entry.getValue();
+
+                //UpdateWeight by No-Relationship Questions
+
+                //UpdateWeight by Age
+                int ageVertex = vertex.getData().getAge();
+                int ageAdjacentVertex = entry.getKey().getData().getAge();
+
+                if (ageVertex < 10 || ageAdjacentVertex < 10) {
+                    weight = weight - 10;
+                } else if (ageVertex >= 10 && ageVertex < 30 || ageAdjacentVertex >= 10 && ageAdjacentVertex < 30) {
+                    weight = weight - 3;
+                } else if (ageVertex >= 30 && ageVertex < 60 || ageAdjacentVertex >= 30 && ageAdjacentVertex < 60) {
+                    weight = weight - 5;
+                } else if (ageVertex >= 60 && ageVertex < 100 || ageAdjacentVertex >= 60 && ageAdjacentVertex < 100) {
+                    weight = weight - 10;
+                }
+
+                // UpdateWeight by InfectionType
+                InfectionType infectionVertex = vertex.getData().getInfectionType();
+                InfectionType infectionAdjacentVertex = entry.getKey().getData().getInfectionType();
                 
+                if (infectionVertex == InfectionType.VIRUS || infectionAdjacentVertex == InfectionType.VIRUS) {
+                    weight = weight - 10;
+                    
+                } else if (infectionVertex == InfectionType.BACTERIA || infectionAdjacentVertex == InfectionType.BACTERIA) {
+                    weight = weight - 5;
+                    
+                } else if (infectionVertex == InfectionType.FUNGUS || infectionAdjacentVertex == InfectionType.FUNGUS) {
+                    weight = weight - 2; 
+                } 
+
+                // UpdateWeight by Relationship Questions
+                    
                 List<String> addAdjacentVertexQuestions = vertex.getAnswers();
     
                 if (addAdjacentVertexQuestions.get(0).equalsIgnoreCase("True")) {
@@ -117,16 +153,16 @@ public class Graph<T> {
                         weight = weight - 8;
                     }
                 }
-                
-                // Actualizar el peso para el vértice adyacente
+                // Update the weight of the edge
                 entry.setValue(weight);
             }
         }
     }
     
+    // Print the graph with the weights
     public void printGraphWithWeights(List<Vertex<T>> nodes) {
         for (Vertex<T> vertex : nodes) {
-            for (Map.Entry<Vertex<T>, Integer> entry : vertex.getAdjacentVerticesWithWeights().entrySet()) {
+            for (Map.Entry<Vertex<T>, Integer> entry : vertex.getAdjacentVerticesWithWeights().entrySet()){
                 Vertex<T> adjacentVertex = entry.getKey();
                 int weight = entry.getValue();
                 
@@ -137,9 +173,36 @@ public class Graph<T> {
         }
     }
 
+    //Update infection.Type status
+
+    public void updateInfectionType(List<Vertex<Person>> nodes){
+        
+        for (Vertex<Person> vertex : nodes) {
+            
+            for (Map.Entry<Vertex<Person>, Integer> entry : vertex.getAdjacentVerticesWithWeights().entrySet()) {
+                 Integer weight = entry.getValue();
+                InfectionType infectionVertex = vertex.getData().getInfectionType();
+                InfectionType infectionAdjacentVertex = entry.getKey().getData().getInfectionType();
+
+                if (infectionVertex == InfectionType.NONE && weight<20 ) {
+                        InfectionType infectionType = InfectionType.VIRUS;                          
+
+
+
+                }
+            }
+        }
+
+
+    }
+
+
+
+    }
 
 
 
 
 
-}
+
+
