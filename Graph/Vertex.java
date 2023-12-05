@@ -73,4 +73,10 @@ public class Vertex<T> implements Comparable<Vertex<T>> {
         return Integer.compare(this.distance, vertex.getDistance());
     }
 
+    public Person.InfectionType getPersonInfectionType() {
+        if (this.data instanceof Person) {
+            return ((Person) this.data).getInfectionType();
+        }
+        return null;
+    }
 }

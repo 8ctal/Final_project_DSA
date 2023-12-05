@@ -11,7 +11,7 @@ public class Graph<T> {
 
 
     //Disktra's Algorithm
-    public void calculateShortestPath(Vertex<T> source) {
+   /* public void calculateShortestPath(Vertex<T> source) {
         source.setDistance(0);
         // Set of vertices whose shortest path is already found
         Set<Vertex<T>> settledVertices = new HashSet<>();
@@ -32,24 +32,59 @@ public class Graph<T> {
             // Add the vertex to the settled vertices when its shortest path is found
             settledVertices.add(currentVertex);
         }
+    }*/
+    public void calculateShortestPath(Vertex<T> source) {
+        if (!(source.getData() instanceof Person) || ((Person) source.getData()).getInfectionType() == null) {
+            return;
+        }
+
+        source.setDistance(0);
+        Set<Vertex<T>> settledVertices = new HashSet<>();
+        Queue<Vertex<T>> unsettledVertices = new PriorityQueue<>(Collections.singletonList(source));
+
+        while (!unsettledVertices.isEmpty()) {
+            Vertex<T> currentVertex = unsettledVertices.poll();
+            currentVertex.getAdjacentVerticesWithWeights()
+                    .entrySet().stream()
+                    .filter(entry -> !settledVertices.contains(entry.getKey()))
+                    .filter(entry -> entry.getKey().getData() instanceof Person && ((Person) entry.getKey().getData()).getInfectionType() != null)
+                    .forEach(entry -> {
+                        evaluateShortestPath(entry.getKey(), entry.getValue(), currentVertex);
+                        unsettledVertices.add(entry.getKey());
+                    });
+            settledVertices.add(currentVertex);
+        }
     }
 
+    private void evaluateShortestPath(Vertex<T> ajdacentVertex, Integer edgeWeight, Vertex<T> sourceVertex) {
+        if (!(ajdacentVertex.getData() instanceof Person) || ((Person) ajdacentVertex.getData()).getInfectionType() == null) {
+            return;
+        }
+
+        Integer newDistance = sourceVertex.getDistance() + edgeWeight;
+        if (newDistance < ajdacentVertex.getDistance()) {
+            ajdacentVertex.setDistance(newDistance);
+            ajdacentVertex.setShortestPath(
+                    Stream.concat(sourceVertex.getShortestPath().stream(), Stream.of(sourceVertex)).toList()
+            );
+        }
+    }
 
     //Print the shortest path from the source vertex to all other vertices
     public void printPaths(List<Vertex<T>> nodes) {
         nodes.forEach(node -> {
             String path = node.getShortestPath().stream()
-                    .map(Vertex::getData).map(Objects::toString)
+                    .map(Vertex::getLetter).map(Objects::toString)
                     .collect(Collectors.joining(" -> "));// Get the shortest path as a String
             System.out.println((path.isBlank() // If the shortest path is blank, print only the vertex and its distance
-                    ? "%s : %s".formatted(node.getData(), node.getDistance())
-                    : "%s -> %s : %s".formatted(path, node.getData(), node.getDistance()))
+                    ? "%s : %s".formatted(node.getLetter(), node.getDistance())
+                    : "%s -> %s : %s".formatted(path, node.getLetter(), node.getDistance()))
             );
         });
     }
 
     // Evaluate the shortest path to the adjacent vertex
-    private void evaluateShortestPath(Vertex<T> ajdacentVertex, Integer edgeWeight, Vertex<T> sourceVertex) {
+    /*private void evaluateShortestPath(Vertex<T> ajdacentVertex, Integer edgeWeight, Vertex<T> sourceVertex) {
         // If the new distance is less than the current distance, update the distance and the shortest path
         Integer newDistance = sourceVertex.getDistance() + edgeWeight;
         if (newDistance < ajdacentVertex.getDistance()) {
@@ -59,7 +94,7 @@ public class Graph<T> {
                     Stream.concat(sourceVertex.getShortestPath().stream(), Stream.of(sourceVertex)).toList()
             );
         }
-    }
+    }*/
 
 
     public void printGraph(List<Vertex<T>> vertices) {
@@ -98,7 +133,7 @@ public class Graph<T> {
 
     private void updateWeightHelper(Vertex<Person> vertex, Set<Vertex<Person>> visited) {
         visited.add(vertex);
-        int i=0;
+        int i = 0;
         for (Map.Entry<Vertex<Person>, Integer> entry : vertex.getAdjacentVerticesWithWeights().entrySet()) {
             Vertex<Person> adjacentVertex = entry.getKey();
 
@@ -155,7 +190,7 @@ public class Graph<T> {
             } else {
                 weight = weight - 8;
             }
-            i+=4;
+            i += 4;
 
             entry.setValue(weight);
 

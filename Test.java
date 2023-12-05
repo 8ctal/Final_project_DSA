@@ -47,11 +47,11 @@ List<Person> population = IntStream.range(0, 10).mapToObj(i -> new Person(
 */
 
         // Crear 10 personas
-        Person person1 = new Person("Alice", 25);
-        Person person2 = new Person("Bob", 30); //InfectionType.None
+        Person person1 = new Person("Alice", 25, InfectionType.BACTERIA);
+        Person person2 = new Person("Bob", 30,InfectionType.BACTERIA); //InfectionType.None
         Person person3 = new Person("Charlie", 22, InfectionType.VIRUS);
         Person person4 = new Person("David", 28);
-        Person person5 = new Person("Eve", 35);
+        Person person5 = new Person("Eve", 35, InfectionType.FUNGUS);
         Person person6 = new Person("Frank", 27, InfectionType.BACTERIA);
         Person person7 = new Person("Grace", 79);
         Person person8 = new Person("Hannah", 26, InfectionType.FUNGUS);
@@ -74,12 +74,13 @@ List<Person> population = IntStream.range(0, 10).mapToObj(i -> new Person(
 
         // Crear relaciones
 
-        /*A.addAdjacentVertexQuestions(B, "True", "False", "True", 7);
-        A.addAdjacentVertexQuestions(C, "False", "True", "False", 5); */
+        A.addAdjacentVertexQuestions(B, "True", "False", "True", 7);
+        A.addAdjacentVertexQuestions(C, "False", "True", "False", 5);
+
         B.addAdjacentVertexQuestions(C, "False", "False", "False", 3);
         B.addAdjacentVertexQuestions(F, "False", "True", "False", 6);
         B.addAdjacentVertexQuestions(H, "True", "False", "True", 8);
-        /*
+
         C.addAdjacentVertexQuestions(D, "False", "True", "False", 1);
         D.addAdjacentVertexQuestions(E, "True", "False", "True", 3);
         D.addAdjacentVertexQuestions(F, "False", "True", "False", 2);
@@ -88,7 +89,7 @@ List<Person> population = IntStream.range(0, 10).mapToObj(i -> new Person(
         G.addAdjacentVertexQuestions(H, "True", "False", "True", 3);
         H.addAdjacentVertexQuestions(I, "False", "True", "False", 2);
         I.addAdjacentVertexQuestions(J, "True", "False", "True", 4);
-        J.addAdjacentVertexQuestions(A, "False", "True", "False", 1);*/
+        J.addAdjacentVertexQuestions(A, "False", "True", "False", 1);
 
         // Crear grafo
 
@@ -102,13 +103,15 @@ List<Person> population = IntStream.range(0, 10).mapToObj(i -> new Person(
         System.out.println("Updated weights: ");
         graph.updateWeight(List.of(A, B, C, D, E, F, G, H, I, J));
         graph.printGraphWithWeights(List.of(A, B, C, D, E, F, G, H, I, J));
-        /*
+
         System.out.println(" New Infection type: ");
         graph.updateInfectionType(List.of(A, B, C, D, E, F, G, H, I, J));
-        graph.printInfectionType(List.of(A, B, C, D, E, F, G, H, I, J));
+        //graph.printInfectionType(List.of(A, B, C, D, E, F, G, H, I, J));
 
-        */
 
+        graph.calculateShortestPath(A);
+        graph.printPaths(List.of(A, B, C, D, E, F, G, H, I, J));
+        System.out.println(C.getPersonInfectionType());
     }
 
 }

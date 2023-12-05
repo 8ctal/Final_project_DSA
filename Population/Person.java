@@ -33,4 +33,5 @@ public class Person {
         FUNGUS,
         NONE // Para representar a una persona no infectada
     }
+
 }
