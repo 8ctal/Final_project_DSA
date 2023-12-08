@@ -43,9 +43,7 @@ List<Person> population = IntStream.range(0, 10).mapToObj(i -> new Person(
 )).collect(Collectors.toList());
         population.forEach(System.out::println);
 
-
 */
-
         // Crear 10 personas
         Person person1 = new Person("Alice", 25, InfectionType.BACTERIA);
         Person person2 = new Person("Bob", 30,InfectionType.BACTERIA); //InfectionType.None
@@ -58,9 +56,7 @@ List<Person> population = IntStream.range(0, 10).mapToObj(i -> new Person(
         Person person9 = new Person("Ian", 8);
         Person person10 = new Person("Julia", 17);
 
-
         // Crear vertices
-
         Vertex<Person> A = new Vertex<>(person1, 'A'); //1
         Vertex<Person> B = new Vertex<>(person2, 'B'); //2
         Vertex<Person> C = new Vertex<>(person3, 'C'); //3
@@ -73,17 +69,14 @@ List<Person> population = IntStream.range(0, 10).mapToObj(i -> new Person(
         Vertex<Person> J = new Vertex<>(person10, 'J');//10
 
         // Crear relaciones
-
         A.addAdjacentVertexQuestions(B, "True", "False", "True", 7);
         A.addAdjacentVertexQuestions(C, "False", "True", "False", 5);
-
-        B.addAdjacentVertexQuestions(C, "False", "False", "False", 3);
         B.addAdjacentVertexQuestions(F, "False", "True", "False", 6);
         B.addAdjacentVertexQuestions(H, "True", "False", "True", 8);
-
+        B.addAdjacentVertexQuestions(C, "False", "False", "False", 3);
         C.addAdjacentVertexQuestions(D, "False", "True", "False", 1);
-        D.addAdjacentVertexQuestions(E, "True", "False", "True", 3);
         D.addAdjacentVertexQuestions(F, "False", "True", "False", 2);
+        D.addAdjacentVertexQuestions(E, "False", "False", "True", 3);
         E.addAdjacentVertexQuestions(F, "True", "False", "True", 4);
         F.addAdjacentVertexQuestions(G, "False", "True", "False", 1);
         G.addAdjacentVertexQuestions(H, "True", "False", "True", 3);
@@ -92,7 +85,6 @@ List<Person> population = IntStream.range(0, 10).mapToObj(i -> new Person(
         J.addAdjacentVertexQuestions(A, "False", "True", "False", 1);
 
         // Crear grafo
-
         Graph<Person> graph = new Graph<Person>();
 /*
         System.out.println("Weights: ");
@@ -108,14 +100,13 @@ List<Person> population = IntStream.range(0, 10).mapToObj(i -> new Person(
         graph.updateInfectionType(List.of(A, B, C, D, E, F, G, H, I, J));
         //graph.printInfectionType(List.of(A, B, C, D, E, F, G, H, I, J));
 
-
+        /*
         graph.calculateShortestPath(A);
         graph.printPaths(List.of(A, B, C, D, E, F, G, H, I, J));
         System.out.println(C.getPersonInfectionType());
+        */
     }
-
 }
-
 /* 
         //Creating the questions
         List<Questions> questions = population.stream()
@@ -135,5 +126,4 @@ List<Person> population = IntStream.range(0, 10).mapToObj(i -> new Person(
         Questions.print(Questions.readQuestions());
     }
 }
-
 */

@@ -29,7 +29,6 @@ public class Vertex<T> implements Comparable<Vertex<T>> {
     public Vertex(T data, char letter) {
         this.data = data;
         this.letter = letter;
-
     }
 
 
@@ -50,7 +49,6 @@ public class Vertex<T> implements Comparable<Vertex<T>> {
      * 4. ¿Cuántos días ha estado en contacto con la Persona?
      */
 
-
     public void addAdjacentVertexQuestions(Vertex<T> vertex, String question1, String question2, String question3, int question4) {
         adjacentVertices.add(vertex);
         adjacentVerticesWithWeights.put(vertex, 40);
@@ -58,9 +56,7 @@ public class Vertex<T> implements Comparable<Vertex<T>> {
         answers.add(question2);
         answers.add(question3);
         answers.add(String.valueOf(question4)); // Convertir la variable numérica a String y agregarla como respuesta
-
     }
-
 
     public void informationPerson(Vertex<Person> nodo) {
         System.out.println("Name: " + nodo.getData().getInfectionType());

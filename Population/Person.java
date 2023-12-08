@@ -13,7 +13,6 @@ public class Person {
     private boolean infected;
     private InfectionType infectionType;
 
-
     public Person(String name, int age) {
         this.name = name;
         this.age = age;
@@ -33,5 +32,4 @@ public class Person {
         FUNGUS,
         NONE // Para representar a una persona no infectada
     }
-
 }

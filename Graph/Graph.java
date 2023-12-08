@@ -9,7 +9,6 @@ import Population.Person.InfectionType;
 
 public class Graph<T> {
 
-
     //Disktra's Algorithm
    /* public void calculateShortestPath(Vertex<T> source) {
         source.setDistance(0);
@@ -33,6 +32,7 @@ public class Graph<T> {
             settledVertices.add(currentVertex);
         }
     }*/
+
     public void calculateShortestPath(Vertex<T> source) {
         if (!(source.getData() instanceof Person) || ((Person) source.getData()).getInfectionType() == null) {
             return;
@@ -96,7 +96,6 @@ public class Graph<T> {
         }
     }*/
 
-
     public void printGraph(List<Vertex<T>> vertices) {
         for (Vertex<T> vertex : vertices) {
             System.out.print(vertex.getLetter() + " -> ");
@@ -129,7 +128,6 @@ public class Graph<T> {
             }
         }
     }
-
 
     private void updateWeightHelper(Vertex<Person> vertex, Set<Vertex<Person>> visited) {
         visited.add(vertex);
@@ -216,7 +214,6 @@ public class Graph<T> {
     }
 
     //Update infection.Type status
-
     public void updateInfectionType(List<Vertex<Person>> nodes) {
         Set<Vertex<Person>> visited = new HashSet<>();
 
@@ -276,13 +273,5 @@ public class Graph<T> {
         for (Vertex<Person> vertex : nodes) {
             System.out.println("Name: " + vertex.getData().getName() + " Infection Type: " + vertex.getData().getInfectionType());
         }
-
-
     }
-
 }
-
-
-
-
-
